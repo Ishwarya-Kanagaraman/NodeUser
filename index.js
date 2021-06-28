@@ -1,4 +1,6 @@
 const express=require('express');
+const mongoose=require('mongoose')
+// import express from "express";
 const app=express();
 const PORT=8080;
 const USERS=[
@@ -63,10 +65,14 @@ const USERS=[
      "id": "10"
     }
    ]
+   const url="mongodb://localhost/movieData";
+   mongoose.connect(url,{useNewUrlParser : true});
+   const con=mongoose.connection;
+   con.on('open',()=>console.log('mongoDB is connected'))
    // middle ware
    app.use(express.json());
 app.get('/',(request,response)=>{
-    response.send('Welcome to node app');
+    response.send('Welcome to node App !!!');
 })
 app.get('/users',(request,response)=>{
     response.send(USERS);
