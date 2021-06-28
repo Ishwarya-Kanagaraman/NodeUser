@@ -63,6 +63,8 @@ const USERS=[
      "id": "10"
     }
    ]
+   // middle ware
+   app.use(express.json());
 app.get('/',(request,response)=>{
     response.send('Welcome to node app');
 })
@@ -73,7 +75,12 @@ app.get('/users/:id',(request,response)=>{
     const user=USERS.find(e=>e.id===request.params.id)
     response.send(user);
 });
+// Add users
 app.post('/users',(request,response)=>{
+    const addUser=request.body;
+    console.log(addUser);
+    USERS.push(addUser);
     response.send(USERS);
+    
 });
 app.listen(PORT,()=>console.log('the server is started in ' + PORT));
